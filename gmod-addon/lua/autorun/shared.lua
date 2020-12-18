@@ -45,6 +45,7 @@ end
 
 function GET(req,params,cb,tries)
 	httpAdress = ("http://"..GetConVar("discordbot_host"):GetString()..":"..GetConVar("discordbot_port"):GetString())
+	print(httpAdress);
 	
 	http.Fetch(httpAdress, function(res)
 		cb(util.JSONToTable(res))

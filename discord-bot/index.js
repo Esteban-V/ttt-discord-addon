@@ -19,7 +19,7 @@ const client = new Discord.Client({sync:true});
 client.login(config.discord.token);
 
 client.on('ready', async () => {
-	console.log('BOT: ON');
+	console.log('BOTA: ON');
 	
 	guild = client.guilds.cache.get(config.discord.guild);
 	config.discord.mainChannels.forEach(channelID => channels.push(channelID));
@@ -112,17 +112,15 @@ get['mute'] = (params,ret) => {
 
 
 http.createServer((req,res)=>{
-	if (typeof req.headers.params === 'string' && typeof req.headers.req === 'string' && typeof get[req.headers.req] === 'function') {
-		try {
-			const params = JSON.parse(req.headers.params);
-			get[req.headers.req](params, function(ret){
-				res.end(JSON.stringify(ret));
-			});
-		}catch(e) {
-			res.end('Invalid JSON');
-		}
-	}else
-		res.end();
+	try {
+		const params = JSON.parse(req.headers.params);
+		get[req.headers.req](params, function(ret){
+			res.end(JSON.stringify(ret));
+		});
+	}catch(e) {
+		console.log(e);
+		res.end('Invalid JSON');
+	}
 }).listen({
 	port: PORT
 },()=>{
