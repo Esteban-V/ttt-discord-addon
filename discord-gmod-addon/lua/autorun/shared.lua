@@ -65,7 +65,6 @@ function sendClientIconInfo(ply,mute)
 	net.Send(ply)
 end
 
-
 function isMuted(ply)
 	return muted[ply]
 end
@@ -81,7 +80,7 @@ function mute(ply)
 						muted[ply] = true
 					end
 					if (res.error) then
-						print("["..GetConVar("discordbot_name"):GetString().."] ".."Error: "..res.err)
+						print("["..GetConVar("discordbot_name"):GetString().."] ".."Error: "..res.error)
 					end
 				end
 
